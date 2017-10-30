@@ -11,7 +11,6 @@ AFRAME.registerComponent("rotate", {
       
       tick : function()
       {	
-      	console.log("hello world")
         this.el.object3D.rotation._y += 0.1
       }
         

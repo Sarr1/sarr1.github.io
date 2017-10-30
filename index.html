@@ -17,8 +17,8 @@
       },
       OnDocumentMouseDown : function(event){
         this.ifMouseDown = true;
-        this.x_cord = event.clientX;
-        this.y_cord = event.clientY;
+        this.x_cord = getClientX(event);
+        this.y_cord = getClientY(event);
       },
       OnDocumentMouseUp : function(){
         this.ifMouseDown = false;
@@ -29,8 +29,8 @@
         windowHalfY = window.innerHeight / 2;
         if(this.ifMouseDown)
         {
-          var temp_x = event.clientX-this.x_cord;
-          var temp_y = event.clientY-this.y_cord;
+          var temp_x = getClientX(event)-this.x_cord;
+          var temp_y = getClientY(event)-this.y_cord;
 
           rotateStart = projectOnTrackball(this.x_cord, this.y_cord);
           rotateEnd = projectOnTrackball(temp_x, temp_y);
@@ -59,11 +59,42 @@
           // {
           //   this.el.object3D.rotateX(temp_y*this.data.speed/100);
           // }
-          this.x_cord = event.clientX;
-          this.y_cord = event.clientY;
+          this.x_cord = getClientX(event);
+          this.y_cord = getClientY(event);
         }
       }
     });
+
+    function getClientX(event){
+          switch(event.type){
+              case "mousedown":
+              case "mouseup":
+              case "mousemove":
+                  return event.clientX;
+              
+              case "touchstart":
+              case "touchend":
+              case "touchmove":
+                  return event.touches[0].clientX;
+          }
+      }
+      
+      
+    function getClientY(event){
+          switch(event.type){
+              case "mousedown":
+              case "mouseup":
+              case "mousemove":
+                  return event.clientY;
+              
+              case "touchstart":
+              case "touchend":
+              case "touchmove":
+                  return event.touches[0].clientY;
+              default: 
+                  return 0;
+          }
+      }
 
     function clamp(value, min, max)
     {

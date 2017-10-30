@@ -9,8 +9,8 @@ AFRAME.registerComponent("rotate", {
       
       tick : function()
       {	
-      	y+=0.1;
-        this.el.object3D.quaternion.set(0, y, 0);
+      	// y+=0.1;
+       //  this.el.object3D.quaternion.set(0, y, 0);
       }
         
 });

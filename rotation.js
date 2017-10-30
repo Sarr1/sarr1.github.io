@@ -9,10 +9,10 @@ AFRAME.registerComponent("rotate", {
       },
   
       
-      init : function()
+      tick : function()
       {	
       	console.log("hello world")
-        console.log(this.el.object3D)
+        this.el.object3D.rotation._y += 0.1
       }
         
 });

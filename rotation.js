@@ -1,6 +1,4 @@
-
-
-
+var y = 0;
 
 AFRAME.registerComponent("rotate", {
       schema : 
@@ -9,9 +7,10 @@ AFRAME.registerComponent("rotate", {
       },
   
       
-      init : function()
+      tick : function()
       {	
-        console.log(this.el.object3D)
+      	y+=0.1
+        this.el.object3D.rotation.set(0, y, 0);
       }
         
 });

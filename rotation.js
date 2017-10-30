@@ -14,7 +14,7 @@ AFRAME.registerComponent("rotate", {
       
       tick : function()
       {	
-      	$(renderer.domElement).on('mousedown', function(e) {
+      	this.sceneEl.renderer.domElement.on('mousedown', function(e) {
 		    isDragging = true;
 		})
 		.on('mousemove', function(e) {
@@ -44,7 +44,7 @@ AFRAME.registerComponent("rotate", {
 		});
 		/* */
 
-		$(document).on('mouseup', function(e) {
+		document.on('mouseup', function(e) {
 		    isDragging = false;
 		});
       }

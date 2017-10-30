@@ -1,4 +1,9 @@
 var y = 0;
+var isDragging = false;
+var previousMousePosition = {
+    x: 0,
+    y: 0
+};
 
 AFRAME.registerComponent("rotate", {
       schema : 
@@ -9,11 +14,45 @@ AFRAME.registerComponent("rotate", {
       
       tick : function()
       {	
-      	y+=0.1;
-        this.el.object3D.quaternion.set(0, y, 0);
+      	$(renderer.domElement).on('mousedown', function(e) {
+		    isDragging = true;
+		})
+		.on('mousemove', function(e) {
+		    //console.log(e);
+		    var deltaMove = {
+		        x: e.offsetX-previousMousePosition.x,
+		        y: e.offsetY-previousMousePosition.y
+		    };
+
+		    if(isDragging) {
+		            
+		        var deltaRotationQuaternion = new three.Quaternion()
+		            .setFromEuler(new three.Euler(
+		                toRadians(deltaMove.y * 1),
+		                toRadians(deltaMove.x * 1),
+		                0,
+		                'XYZ'
+		            ));
+		        
+		        this.el.object3D.quaternion.multiplyQuaternions(deltaRotationQuaternion, this.el.object3D.quaternion);
+		    }
+		    
+		    previousMousePosition = {
+		        x: e.offsetX,
+		        y: e.offsetY
+		    };
+		});
+		/* */
+
+		$(document).on('mouseup', function(e) {
+		    isDragging = false;
+		});
       }
         
 });
+
+
+
 
 
 // function projectOnTrackball(touchX, touchY)

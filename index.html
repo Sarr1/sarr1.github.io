@@ -25,42 +25,45 @@
       },
       OnDocumentMouseMove : function(event)
       {
-        windowHalfX = window.innerWidth / 2;
-        windowHalfY = window.innerHeight / 2;
-        if(this.ifMouseDown)
+        if (!ifMouseDown)
         {
-          var temp_x = getClientX(event)-this.x_cord;
-          var temp_y = getClientY(event)-this.y_cord;
-
-          rotateStart = projectOnTrackball(this.x_cord, this.y_cord);
-          rotateEnd = projectOnTrackball(temp_x, temp_y);
-
-          var axis = new THREE.Vector3(),
-            quaternion = new THREE.Quaternion();
-
-          var angle = Math.acos(rotateStart.dot(rotateEnd) / rotateStart.length() / rotateEnd.length());
-
-          if (angle)
+          windowHalfX = window.innerWidth / 2;
+          windowHalfY = window.innerHeight / 2;
+          if(this.ifMouseDown)
           {
-            axis.crossVectors(rotateStart, rotateEnd).normalize();
-            angle *= rotationSpeed;
-            quaternion.setFromAxisAngle(axis, angle);
-          }
-          curQuaternion = this.el.object3D.quaternion;
-          curQuaternion.multiplyQuaternions(quaternion, curQuaternion);
-          curQuaternion.normalize();
-          this.el.object3D.setRotationFromQuaternion(curQuaternion);
+            var temp_x = getClientX(event)-this.x_cord;
+            var temp_y = getClientY(event)-this.y_cord;
 
-          // if(Math.abs(temp_y)<Math.abs(temp_x))
-          // {
-          //   this.el.object3D.rotateY(temp_x*this.data.speed/100);
-          // }
-          // else
-          // {
-          //   this.el.object3D.rotateX(temp_y*this.data.speed/100);
-          // }
-          this.x_cord = getClientX(event);
-          this.y_cord = getClientY(event);
+            rotateStart = projectOnTrackball(this.x_cord, this.y_cord);
+            rotateEnd = projectOnTrackball(temp_x, temp_y);
+
+            var axis = new THREE.Vector3(),
+              quaternion = new THREE.Quaternion();
+
+            var angle = Math.acos(rotateStart.dot(rotateEnd) / rotateStart.length() / rotateEnd.length());
+
+            if (angle)
+            {
+              axis.crossVectors(rotateStart, rotateEnd).normalize();
+              angle *= rotationSpeed;
+              quaternion.setFromAxisAngle(axis, angle);
+            }
+            curQuaternion = this.el.object3D.quaternion;
+            curQuaternion.multiplyQuaternions(quaternion, curQuaternion);
+            curQuaternion.normalize();
+            this.el.object3D.setRotationFromQuaternion(curQuaternion);
+
+            // if(Math.abs(temp_y)<Math.abs(temp_x))
+            // {
+            //   this.el.object3D.rotateY(temp_x*this.data.speed/100);
+            // }
+            // else
+            // {
+            //   this.el.object3D.rotateX(temp_y*this.data.speed/100);
+            // }
+            this.x_cord = getClientX(event);
+            this.y_cord = getClientY(event);
+          }
         }
       }
     });

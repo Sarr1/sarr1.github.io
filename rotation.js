@@ -11,6 +11,7 @@ AFRAME.registerComponent("rotate", {
       
       init : function()
       {	
+      	console.log("hello world")
         console.log(this.el.object3D)
       }
         

@@ -9,7 +9,7 @@ AFRAME.registerComponent("rotate", {
       },
   
       
-      tick : function()
+      init : function()
       {	
         console.log(this.el)
       }

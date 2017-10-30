@@ -11,7 +11,7 @@ AFRAME.registerComponent("rotate", {
       
       init : function()
       {	
-        console.log(this.el)
+        console.log(this.el.rotation)
       }
         
 });

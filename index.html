@@ -26,19 +26,62 @@
         {
           var temp_x = event.clientX-this.x_cord;
           var temp_y = event.clientY-this.y_cord;
-          if(Math.abs(temp_y)<Math.abs(temp_x))
+
+          rotateStart = projectOnTrackball(this.x_cord, this.y_cord);
+          rotateEnd = projectOnTrackball(temp_x, temp_y);
+
+          var axis = new THREE.Vector3(),
+            quaternion = new THREE.Quaternion();
+
+          var angle = Math.acos(rotateStart.dot(rotateEnd) / rotateStart.length() / rotateEnd.length());
+
+          if (angle)
           {
-            this.el.object3D.rotateY(temp_x*this.data.speed/100);
+            axis.crossVectors(rotateStart, rotateEnd).normalize();
+            angle *= rotationSpeed;
+            quaternion.setFromAxisAngle(axis, angle);
           }
-          else
-          {
-            this.el.object3D.rotateX(temp_y*this.data.speed/100);
-          }
+          curQuaternion = this.el.object3D.quaternion;
+          curQuaternion.multiplyQuaternions(quaternion, curQuaternion);
+          curQuaternion.normalize();
+          this.el.object3D.setRotationFromQuaternion(curQuaternion);
+
+          // if(Math.abs(temp_y)<Math.abs(temp_x))
+          // {
+          //   this.el.object3D.rotateY(temp_x*this.data.speed/100);
+          // }
+          // else
+          // {
+          //   this.el.object3D.rotateX(temp_y*this.data.speed/100);
+          // }
           this.x_cord = event.clientX;
           this.y_cord = event.clientY;
         }
       }
     });
+
+    function projectOnTrackball(touchX, touchY)
+    {
+      var mouseOnBall = new THREE.Vector3();
+
+      mouseOnBall.set(
+        clamp(touchX / windowHalfX, -1, 1), clamp(-touchY / windowHalfY, -1, 1),
+        0.0
+      );
+
+      var length = mouseOnBall.length();
+
+      if (length > 1.0)
+      {
+        mouseOnBall.normalize();
+      }
+      else
+      {
+        mouseOnBall.z = Math.sqrt(1.0 - length * length);
+      }
+
+      return mouseOnBall;
+    }
   </script>
   <a-scene embedded arjs="sourceType: webcam;">
     <!-- handle marker with your own pattern -->

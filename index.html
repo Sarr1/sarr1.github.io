@@ -28,11 +28,11 @@
           var temp_y = event.clientY-this.y_cord;
           if(Math.abs(temp_y)<Math.abs(temp_x))
           {
-            this.el.object3D.rotateY(temp_x*this.data.speed/1000);
+            this.el.object3D.rotateY(temp_x*this.data.speed/100);
           }
           else
           {
-            this.el.object3D.rotateX(temp_y*this.data.speed/1000);
+            this.el.object3D.rotateX(temp_y*this.data.speed/100);
           }
           this.x_cord = event.clientX;
           this.y_cord = event.clientY;

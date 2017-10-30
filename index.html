@@ -59,10 +59,12 @@
         }
       }
     });
+    
     function clamp(value, min, max)
     {
       return Math.min(Math.max(value, min), max);
     }
+
     function projectOnTrackball(touchX, touchY)
     {
       var mouseOnBall = new THREE.Vector3();

@@ -138,7 +138,7 @@ function projectOnTrackball(touchX, touchY)
 
   mouseOnBall.set(
     clamp(touchX / windowHalfX, -1, 1), 
-    clamp(-touchY / windowHalfY, -1, 1),
+    clamp(touchY / windowHalfY, -1, 1),
     0.0
   );
 

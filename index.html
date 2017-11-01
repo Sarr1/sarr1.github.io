@@ -17,14 +17,14 @@
         this.rotationSpeed = 2;
         this.lastMoveTimeStamp = 50;
         this.moveReleaseTimeDelta = 50;
-        document.addEventListener('mousedown', this.OnDocumentMouseDown.bind(this));
-        document.addEventListener('touchstart', this.OnDocumentMouseDown.bind(this));
+        document.addEventListener('mousedown', this.OnDocumentMouseDown.bind(this), false);
+        document.addEventListener('touchstart', this.OnDocumentMouseDown.bind(this), false);
       },
       OnDocumentMouseDown : function(event){
-        document.addEventListener('mouseup', this.OnDocumentMouseUp.bind(this));
-        document.addEventListener('mousemove', this.OnDocumentMouseMove.bind(this));
-        document.addEventListener('touchmove', this.OnDocumentMouseMove.bind(this));
-        document.addEventListener('touchend', this.OnDocumentMouseUp.bind(this));
+        document.addEventListener('mouseup', this.OnDocumentMouseUp.bind(this), false);
+        document.addEventListener('mousemove', this.OnDocumentMouseMove.bind(this), false);
+        document.addEventListener('touchmove', this.OnDocumentMouseMove.bind(this), false);
+        document.addEventListener('touchend', this.OnDocumentMouseUp.bind(this), false);
 
         this.ifMouseDown = true;
 
@@ -46,10 +46,10 @@
         }
         this.ifMouseDown = false;
 
-        document.removeEventListener('mouseup', this.OnDocumentMouseUp);
-        document.removeEventListener('mousemove', this.OnDocumentMouseMove);
-        document.removeEventListener('touchmove', this.OnDocumentMouseMove);
-        document.removeEventListener('touchend', this.OnDocumentMouseUp);
+        document.removeEventListener('mouseup', this.OnDocumentMouseUp, false);
+        document.removeEventListener('mousemove', this.OnDocumentMouseMove, false);
+        document.removeEventListener('touchmove', this.OnDocumentMouseMove, false);
+        document.removeEventListener('touchend', this.OnDocumentMouseUp, false);
       },
       OnDocumentMouseMove : function(event)
       {

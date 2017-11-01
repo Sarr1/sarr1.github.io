@@ -11,6 +11,10 @@
         this.ifMouseDown = false;
         this.x_cord = 0;
         this.y_cord = 0;
+        this.deltaX = 0;
+        this.deltaY = 0;
+        this.rotateStartPoint;
+        this.rotateEndPoint;
         this.rotationSpeed = 2;
         this.lastMoveTimeStamp = 50;
         this.moveReleaseTimeDelta = 50;
@@ -21,17 +25,26 @@
         document.addEventListener('touchup', this.OnDocumentMouseUp.bind(this));
       },
       OnDocumentMouseDown : function(event){
+        document.addEventListener('mousedown',this.OnDocumentMouseDown.bind(this));
+        document.addEventListener('mouseup',this.OnDocumentMouseUp.bind(this));
+        document.addEventListener('mousemove',this.OnDocumentMouseMove.bind(this));
+        document.addEventListener('touchmove', this.OnDocumentMouseMove.bind(this));
+        document.addEventListener('touchup', this.OnDocumentMouseUp.bind(this));
+
         this.ifMouseDown = true;
+
         this.x_cord = getClientX(event);
         this.y_cord = getClientY(event);
+
+        this.rotateStartPoint = this.rotateEndPoint = projectOnTrackball(0, 0);
       },
       OnDocumentMouseUp : function(){
         if(this.lastMoveTimestamp){
             //alert("pointer up");
             if (new Date().getTime() - this.lastMoveTimestamp.getTime() > this.moveReleaseTimeDelta)
             {
-              this.x_cord = getClientX(event) - this.x_cord;
-              this.y_cord = getClientY(event) - this.y_cord;
+              this.deltaX = getClientX(event) - this.x_cord;
+              this.deltaY = getClientY(event) - this.y_cord;
             }
         }
         this.ifMouseDown = false;
@@ -47,22 +60,22 @@
         // windowHalfX = window.innerWidth / 2;
         // windowHalfY = window.innerHeight / 2;
 
-          var temp_x = getClientX(event)-this.x_cord;
-          var temp_y = getClientY(event)-this.y_cord;
+        this.deltaX = getClientX(event)-this.x_cord;
+        this.deltaY = getClientY(event)-this.y_cord;
 
-          rotateStart = projectOnTrackball(this.x_cord, this.y_cord);
-          rotateEnd = projectOnTrackball(temp_x, temp_y);
+        this.rotateStartPoint = projectOnTrackball(this.x_cord, this.y_cord);
+        this.rotateEndPoint = projectOnTrackball(this.deltaX, this.deltaY);
 
-          var quaternion = rotateMatrix(rotateStart, rotateEnd);
-          curQuaternion = this.el.object3D.quaternion;
-          curQuaternion.multiplyQuaternions(quaternion, curQuaternion);
-          curQuaternion.normalize();
-          this.el.object3D.setRotationFromQuaternion(curQuaternion);
+        var quaternion = rotateMatrix(this.rotateStartPoint, this.rotateEndPoint);
+        curQuaternion = this.el.object3D.quaternion;
+        curQuaternion.multiplyQuaternions(quaternion, curQuaternion);
+        curQuaternion.normalize();
+        this.el.object3D.setRotationFromQuaternion(curQuaternion);
 
-          this.x_cord = getClientX(event);
-          this.y_cord = getClientY(event);
+        this.x_cord = getClientX(event);
+        this.y_cord = getClientY(event);
 
-          this.lastMoveTimestamp = new Date();
+        this.lastMoveTimestamp = new Date();
         
       }
     });

@@ -46,10 +46,10 @@
         }
         this.ifMouseDown = false;
 
-        document.removeEventListener('mouseup');
-        document.removeEventListener('mousemove');
-        document.removeEventListener('touchmove');
-        document.removeEventListener('touchend');
+        document.removeEventListener('mouseup', this.OnDocumentMouseUp);
+        document.removeEventListener('mousemove', this.OnDocumentMouseMove);
+        document.removeEventListener('touchmove', this.OnDocumentMouseMove;
+        document.removeEventListener('touchend', this.OnDocumentMouseUp);
       },
       OnDocumentMouseMove : function(event)
       {

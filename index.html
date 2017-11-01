@@ -13,8 +13,9 @@
         this.y_cord = 0;
         this.deltaX = 0;
         this.deltaY = 0;
-        this.rotateStartPoint;
-        this.rotateEndPoint;
+        this.startPoint = new THREE.Vector2();;
+        this.rotateStartPoint = new THREE.Vector3(0, 0, 1);;
+        this.rotateEndPoint = new THREE.Vector3(0, 0, 1);;
         this.rotationSpeed = 2;
         this.lastMoveTimeStamp = 50;
         this.moveReleaseTimeDelta = 50;
@@ -33,9 +34,12 @@
 
         this.ifMouseDown = true;
 
-        this.x_cord = getClientX(event);
-        this.y_cord = getClientY(event);
 
+        this.startPoint = {
+          x: getClientX(event),
+          y: getClientY(event)
+        };
+        
         this.rotateStartPoint = this.rotateEndPoint = projectOnTrackball(0, 0);
       },
       OnDocumentMouseUp : function(){
@@ -43,8 +47,8 @@
             //alert("pointer up");
             if (new Date().getTime() - this.lastMoveTimestamp.getTime() > this.moveReleaseTimeDelta)
             {
-              this.deltaX = getClientX(event) - this.x_cord;
-              this.deltaY = getClientY(event) - this.y_cord;
+              this.deltaX = getClientX(event) - this.startPoint.x;
+              this.deltaY = getClientY(event) - this.startPoint.y;
             }
         }
         this.ifMouseDown = false;
@@ -60,10 +64,10 @@
         // windowHalfX = window.innerWidth / 2;
         // windowHalfY = window.innerHeight / 2;
 
-        this.deltaX = getClientX(event)-this.x_cord;
-        this.deltaY = getClientY(event)-this.y_cord;
+        this.deltaX = getClientX(event)-this.startPoint.x;
+        this.deltaY = getClientY(event)-this.startPoint.y;
 
-        this.rotateStartPoint = projectOnTrackball(this.x_cord, this.y_cord);
+        // this.rotateStartPoint = projectOnTrackball(this.x_cord, this.y_cord);
         this.rotateEndPoint = projectOnTrackball(this.deltaX, this.deltaY);
 
         var quaternion = rotateMatrix(this.rotateStartPoint, this.rotateEndPoint);
@@ -72,8 +76,10 @@
         curQuaternion.normalize();
         this.el.object3D.setRotationFromQuaternion(curQuaternion);
 
-        this.x_cord = getClientX(event);
-        this.y_cord = getClientY(event);
+        rotateEndPoint = rotateStartPoint;
+
+        this.startPoint.x = getClientX(event);
+        this.startPoint.y = getClientY(event);
 
         this.lastMoveTimestamp = new Date();
         

@@ -9,13 +9,11 @@
       schema : { speed : {default:1}},
       init : function(){
         this.ifMouseDown = false;
-        this.x_cord = 0;
-        this.y_cord = 0;
         this.deltaX = 0;
         this.deltaY = 0;
-        this.startPoint = new THREE.Vector2();;
-        this.rotateStartPoint = new THREE.Vector3(0, 0, 1);;
-        this.rotateEndPoint = new THREE.Vector3(0, 0, 1);;
+        this.startPoint = new THREE.Vector2();
+        this.rotateStartPoint = new THREE.Vector3(0, 0, 1);
+        this.rotateEndPoint = new THREE.Vector3(0, 0, 1);
         this.rotationSpeed = 2;
         this.lastMoveTimeStamp = 50;
         this.moveReleaseTimeDelta = 50;
@@ -23,13 +21,12 @@
         document.addEventListener('touchstart', this.OnDocumentMouseDown.bind(this));
       },
       OnDocumentMouseDown : function(event){
-        document.addEventListener('mouseup',this.OnDocumentMouseUp.bind(this));
-        document.addEventListener('mousemove',this.OnDocumentMouseMove.bind(this));
+        document.addEventListener('mouseup', this.OnDocumentMouseUp.bind(this));
+        document.addEventListener('mousemove', this.OnDocumentMouseMove.bind(this));
         document.addEventListener('touchmove', this.OnDocumentMouseMove.bind(this));
         document.addEventListener('touchend', this.OnDocumentMouseUp.bind(this));
 
         this.ifMouseDown = true;
-
 
         this.startPoint = {
           x: getClientX(event),
@@ -71,7 +68,7 @@
         curQuaternion.normalize();
         this.el.object3D.setRotationFromQuaternion(curQuaternion);
 
-        rotateEndPoint = rotateStartPoint;
+        this.rotateEndPoint = this.rotateStartPoint;
 
         this.startPoint.x = getClientX(event);
         this.startPoint.y = getClientY(event);

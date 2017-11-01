@@ -137,8 +137,8 @@ function projectOnTrackball(touchX, touchY)
   var mouseOnBall = new THREE.Vector3();
 
   mouseOnBall.set(
-    clamp(touchX / windowHalfX, -1, 1), 
-    clamp(touchY / windowHalfY, -1, 1),
+    clamp(-touchX / windowHalfX, -1, 1), 
+    clamp(-touchY / windowHalfY, -1, 1),
     0.0
   );
 

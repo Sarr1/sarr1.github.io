@@ -19,14 +19,13 @@
         this.moveReleaseTimeDelta = 50;
         document.addEventListener('mousedown', this.OnDocumentMouseDown, false);
         document.addEventListener('touchstart', this.OnDocumentMouseDown, false);
-        
-      },
-      OnDocumentMouseDown : function(event) {
         document.addEventListener('mouseup', this.OnDocumentMouseUp, false);
         document.addEventListener('touchend', this.OnDocumentMouseUp, false);
         document.addEventListener('mousemove', this.OnDocumentMouseMove, false);
         document.addEventListener('touchmove', this.OnDocumentMouseMove, false);
         
+      },
+      OnDocumentMouseDown : function(event) {
         this.ifMouseDown = true;
 
         this.startPoint = {
@@ -47,10 +46,10 @@
         }
         this.ifMouseDown = false;
 
-        document.removeEventListener('mouseup', this.OnDocumentMouseUp, false);
-        document.removeEventListener('mousemove', this.OnDocumentMouseMove, false);
-        document.removeEventListener('touchmove', this.OnDocumentMouseMove, false);
-        document.removeEventListener('touchend', this.OnDocumentMouseUp, false);
+        // document.removeEventListener('mouseup', this.OnDocumentMouseUp, false);
+        // document.removeEventListener('mousemove', this.OnDocumentMouseMove, false);
+        // document.removeEventListener('touchmove', this.OnDocumentMouseMove, false);
+        // document.removeEventListener('touchend', this.OnDocumentMouseUp, false);
       },
       OnDocumentMouseMove : function(event)
       {

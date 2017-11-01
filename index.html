@@ -19,12 +19,13 @@
         this.moveReleaseTimeDelta = 50;
         document.addEventListener('mousedown', this.OnDocumentMouseDown.bind(this), false);
         document.addEventListener('touchstart', this.OnDocumentMouseDown.bind(this), false);
+        document.addEventListener('mouseup', this.OnDocumentMouseUp.bind(this), false);
+        document.addEventListener('mousemove', this.OnDocumentMouseMove.bind(this), false);
+        document.addEventListener('touchmove', this.OnDocumentMouseMove.bind(this), false);
+        document.addEventListener('touchend', this.OnDocumentMouseUp.bind(this), false);
       },
       OnDocumentMouseDown : function(event){
-        // document.addEventListener('mouseup', this.OnDocumentMouseUp.bind(this), false);
-        // document.addEventListener('mousemove', this.OnDocumentMouseMove.bind(this), false);
-        // document.addEventListener('touchmove', this.OnDocumentMouseMove.bind(this), false);
-        // document.addEventListener('touchend', this.OnDocumentMouseUp.bind(this), false);
+        
 
         this.ifMouseDown = true;
 

@@ -9,7 +9,7 @@ var rotateEndPoint = new THREE.Vector3(0, 0, 1);
 var curQuaternion;
 var windowHalfX = window.innerWidth / 2;
 var windowHalfY = window.innerHeight / 2;
-var rotationSpeed = 2;
+var rotationSpeed = 4;
 var lastMoveTimestamp,
   moveReleaseTimeDelta = 50;
 

@@ -17,8 +17,8 @@
         document.addEventListener('mousedown',this.OnDocumentMouseDown.bind(this));
         document.addEventListener('mouseup',this.OnDocumentMouseUp.bind(this));
         document.addEventListener('mousemove',this.OnDocumentMouseMove.bind(this));
-        document.removeEventListener('touchmove', this.OnDocumentMouseMove.bind(this));
-        document.removeEventListener('touchup', this.OnDocumentMouseUp.bind(this));
+        document.addEventListener('touchmove', this.OnDocumentMouseMove.bind(this));
+        document.addEventListener('touchup', this.OnDocumentMouseUp.bind(this));
       },
       OnDocumentMouseDown : function(event){
         this.ifMouseDown = true;
@@ -35,12 +35,18 @@
             }
         }
         this.ifMouseDown = false;
+
+        document.removeEventListener('mousedown',this.OnDocumentMouseDown.bind(this));
+        document.removeEventListener('mouseup',this.OnDocumentMouseUp.bind(this));
+        document.removeEventListener('mousemove',this.OnDocumentMouseMove.bind(this));
+        document.removeEventListener('touchmove', this.OnDocumentMouseMove.bind(this));
+        document.removeEventListener('touchup', this.OnDocumentMouseUp.bind(this));
       },
       OnDocumentMouseMove : function(event)
       {
         // windowHalfX = window.innerWidth / 2;
         // windowHalfY = window.innerHeight / 2;
-        if (this.ifMouseDown) {
+
           var temp_x = getClientX(event)-this.x_cord;
           var temp_y = getClientY(event)-this.y_cord;
 
@@ -59,8 +65,7 @@
           this.lastMoveTimestamp = new Date();
         }
       }
-    }
-  });
+    });
 
     function getClientX(event){
           switch(event.type){

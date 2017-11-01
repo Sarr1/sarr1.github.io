@@ -9,7 +9,7 @@ var rotateEndPoint = new THREE.Vector3(0, 0, 1);
 var curQuaternion;
 var windowHalfX = window.innerWidth / 2;
 var windowHalfY = window.innerHeight / 2;
-var rotationSpeed = 4;
+var rotationSpeed = 2;
 var lastMoveTimestamp,
   moveReleaseTimeDelta = 50;
 
@@ -27,12 +27,12 @@ var deltaX = 0,
 AFRAME.registerComponent('drag-rotate-component',{
   schema : { speed : {default:1}},
   init : function() {
+    console.log(this.el.object3D)
     document.addEventListener('mousedown', this.OnDocumentMouseDown.bind(this), false);
     document.addEventListener('touchstart', this.OnDocumentMouseDown.bind(this), false);
   },
   OnDocumentMouseDown : function(event) {
 
-    console.log("mouse down")
     event.preventDefault();
     document.addEventListener('mousemove', this.OnDocumentMouseMove.bind(this), false);
     document.addEventListener('mouseup', this.OnDocumentMouseUp.bind(this), false);
@@ -49,7 +49,6 @@ AFRAME.registerComponent('drag-rotate-component',{
     rotateStartPoint = rotateEndPoint = projectOnTrackball(0, 0);
   },
   OnDocumentMouseUp : function(event) {
-    console.log("mouse up")
     if (new Date().getTime() - lastMoveTimestamp.getTime() > moveReleaseTimeDelta)
     {
       deltaX = getClientX(event) - startPoint.x;
@@ -65,7 +64,6 @@ AFRAME.registerComponent('drag-rotate-component',{
   },
   OnDocumentMouseMove : function(event)
   {
-    console.log("mouse move")
     if (mouseDown) {
       deltaX = getClientX(event) - startPoint.x;
       deltaY = getClientY(event) - startPoint.y;
@@ -86,7 +84,6 @@ AFRAME.registerComponent('drag-rotate-component',{
 
 var handleRotation = function(object)
 {
-  console.log(object)
   rotateEndPoint = projectOnTrackball(deltaX, deltaY);
 
   var rotateQuaternion = rotateMatrix(rotateStartPoint, rotateEndPoint);

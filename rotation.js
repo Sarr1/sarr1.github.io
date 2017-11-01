@@ -1,167 +1,173 @@
-// var y = 0;
-// var isDragging = false;
-// var previousMousePosition = {
-//     x: 0,
-//     y: 0
-// };
+////////////////////////////
+////      GLOBALS       ////
+////////////////////////////
 
-// AFRAME.registerComponent("rotate", {
-//       schema : 
-//       {
-//         type: 'string'
-//       },
-  
-      
-//       tick : function()
-//       {	
-//       	this.sceneEl.renderer.domElement.on('mousedown', function(e) {
-// 		    isDragging = true;
-// 		})
-// 		.on('mousemove', function(e) {
-// 		    //console.log(e);
-// 		    var deltaMove = {
-// 		        x: e.offsetX-previousMousePosition.x,
-// 		        y: e.offsetY-previousMousePosition.y
-// 		    };
+var mouseDown = false;
+var rotateStartPoint = new THREE.Vector3(0, 0, 1);
+var rotateEndPoint = new THREE.Vector3(0, 0, 1);
 
-// 		    if(isDragging) {
-		            
-// 		        var deltaRotationQuaternion = new three.Quaternion()
-// 		            .setFromEuler(new three.Euler(
-// 		                toRadians(deltaMove.y * 1),
-// 		                toRadians(deltaMove.x * 1),
-// 		                0,
-// 		                'XYZ'
-// 		            ));
-		        
-// 		        this.el.object3D.quaternion.multiplyQuaternions(deltaRotationQuaternion, this.el.object3D.quaternion);
-// 		    }
-		    
-// 		    previousMousePosition = {
-// 		        x: e.offsetX,
-// 		        y: e.offsetY
-// 		    };
-// 		});
-// 		/* */
+var curQuaternion;
+var windowHalfX = window.innerWidth / 2;
+var windowHalfY = window.innerHeight / 2;
+var rotationSpeed = 2;
+var lastMoveTimestamp,
+  moveReleaseTimeDelta = 50;
 
-// 		document.on('mouseup', function(e) {
-// 		    isDragging = false;
-// 		});
-//       }
-        
-// });
+var startPoint = {
+  x: 0,
+  y: 0
+};
 
+var deltaX = 0,
+  deltaY = 0;
 
+////////////////////////////
+//// ROTATION COMPONENT ////
+////////////////////////////
+AFRAME.registerComponent('drag-rotate-component',{
+  schema : { speed : {default:1}},
+  init : function() {
+    document.addEventListener('mousedown', this.OnDocumentMouseDown.bind(this), false);
+    document.addEventListener('touchstart', this.OnDocumentMouseDown.bind(this), false);
+  },
+  OnDocumentMouseDown : function(event) {
 
+    console.log("mouse down")
+    event.preventDefault();
+    document.addEventListener('mousemove', this.OnDocumentMouseMove.bind(this), false);
+    document.addEventListener('mouseup', this.OnDocumentMouseUp.bind(this), false);
+    document.addEventListener('touchmove', this.OnDocumentMouseMove.bind(this), false);
+    document.addEventListener('touchend', this.OnDocumentMouseUp.bind(this), false);
 
+    mouseDown = true;
 
-// function projectOnTrackball(touchX, touchY)
-// {
-// 	var mouseOnBall = new THREE.Vector3();
+    startPoint = {
+      x: getClientX(event),
+      y: getClientY(event)
+    };
 
-// 	mouseOnBall.set(
-// 		clamp(touchX / windowHalfX, -1, 1), clamp(-touchY / windowHalfY, -1, 1),
-// 		0.0
-// 	);
+    rotateStartPoint = rotateEndPoint = projectOnTrackball(0, 0);
+  },
+  OnDocumentMouseUp : function(event) {
+    console.log("mouse up")
+    if (new Date().getTime() - lastMoveTimestamp.getTime() > moveReleaseTimeDelta)
+    {
+      deltaX = getClientX(event) - startPoint.x;
+      deltaY = getClientY(event) - startPoint.y;
+    }
 
-// 	var length = mouseOnBall.length();
+    mouseDown = false;
 
-// 	if (length > 1.0)
-// 	{
-// 		mouseOnBall.normalize();
-// 	}
-// 	else
-// 	{
-// 		mouseOnBall.z = Math.sqrt(1.0 - length * length);
-// 	}
+    document.removeEventListener('mousemove', this.OnDocumentMouseMove, false);
+    document.removeEventListener('mouseup', this.OonDocumentMouseUp, false);
+    document.removeEventListener('touchmove', this.OnDocumentMouseMove, false);
+    document.removeEventListener('touchend', this.OnDocumentMouseUp, false);
+  },
+  OnDocumentMouseMove : function(event)
+  {
+    console.log("mouse move")
+    if (mouseDown) {
+      deltaX = getClientX(event) - startPoint.x;
+      deltaY = getClientY(event) - startPoint.y;
 
-// 	return mouseOnBall;
-// }
+      handleRotation(this.el.object3D);
 
-// function rotateMatrix(rotateStart, rotateEnd)
-// {
-// 	var axis = new THREE.Vector3(),
-// 		quaternion = new THREE.Quaternion();
+      startPoint.x = getClientX(event);
+      startPoint.y = getClientY(event);
 
-// 	var angle = Math.acos(rotateStart.dot(rotateEnd) / rotateStart.length() / rotateEnd.length());
+      lastMoveTimestamp = new Date();
+    }
+  } 
+});
 
-// 	if (angle)
-// 	{
-// 		axis.crossVectors(rotateStart, rotateEnd).normalize();
-// 		angle *= rotationSpeed;
-// 		quaternion.setFromAxisAngle(axis, angle);
-// 	}
-// 	return quaternion;
-// }
+////////////////////////////
+////  ROTATION HELPERS  ////
+////////////////////////////
 
-// function clamp(value, min, max)
-// {
-// 	return Math.min(Math.max(value, min), max);
-// }
+var handleRotation = function(object)
+{
+  console.log(object)
+  rotateEndPoint = projectOnTrackball(deltaX, deltaY);
 
-// function update()
-// {
-// var v = 1 + ((scaleslider.value - 50) / 100);
-// //console.log(v);
-// root.scale.x = v;
-// root.scale.y = v;
-// root.scale.z = v;
+  var rotateQuaternion = rotateMatrix(rotateStartPoint, rotateEndPoint);
+  curQuaternion = object.quaternion;
+  curQuaternion.multiplyQuaternions(rotateQuaternion, curQuaternion);
+  curQuaternion.normalize();
+  object.setRotationFromQuaternion(curQuaternion);
 
-// //info.innerHTML = infotext + "  " + deltaX + "  " + deltaY;
-// 	requestAnimationFrame(update);
-// 	render();
-// }
+  rotateEndPoint = rotateStartPoint;
+};
+function getClientX(event){
+    switch(event.type){
+        case "mousedown":
+        case "mouseup":
+        case "mousemove":
+            return event.clientX;
 
-// function render()
-// { 
+        case "touchstart":
+        case "touchend":
+        case "touchmove":
+            return event.touches[0].clientX;
+    }
+}
 
-// 	if (!mouseDown)
-// 	{
-// 		var drag = 0.95;
-// 		var minDelta = 0.05;
+function getClientY(event){
+    switch(event.type){
+        case "mousedown":
+        case "mouseup":
+        case "mousemove":
+            return event.clientY;
 
-// 		if (deltaX < -minDelta || deltaX > minDelta)
-// 		{
-// 			deltaX *= drag;
-// 		}
-// 		else
-// 		{
-// 			deltaX = 0;
-// 		}
+        case "touchstart":
+        case "touchend":
+        case "touchmove":
+            return event.touches[0].clientY;
+        default: 
+            return 0;
+    }
+}
 
-// 		if (deltaY < -minDelta || deltaY > minDelta)
-// 		{
-// 			deltaY *= drag;
-// 		}
-// 		else
-// 		{
-// 			deltaY = 0;
-// 		}
+function clamp(value, min, max)
+{
+  return Math.min(Math.max(value, min), max);
+}
 
-// 		handleRotation();
-// 	}
+function projectOnTrackball(touchX, touchY)
+{
+  var mouseOnBall = new THREE.Vector3();
 
-// 	renderer.render(scene, camera);
-// }
+  mouseOnBall.set(
+    clamp(touchX / windowHalfX, -1, 1), 
+    clamp(-touchY / windowHalfY, -1, 1),
+    0.0
+  );
 
-// var handleRotation = function()
-// {
-// if(!cube) return;
-// 	rotateEndPoint = projectOnTrackball(deltaX, deltaY);
+  var length = mouseOnBall.length();
 
-// 	var rotateQuaternion = rotateMatrix(rotateStartPoint, rotateEndPoint);
-// 	curQuaternion = cube.quaternion;
-// 	curQuaternion.multiplyQuaternions(rotateQuaternion, curQuaternion);
-// 	curQuaternion.normalize();
-// 	cube.setRotationFromQuaternion(curQuaternion);
+  if (length > 1.0)
+  {
+    mouseOnBall.normalize();
+  }
+  else
+  {
+    mouseOnBall.z = Math.sqrt(1.0 - length * length);
+  }
 
-// 	rotateEndPoint = rotateStartPoint;
-// };
+  return mouseOnBall;
+}
 
-// // PUBLIC INTERFACE
-// return {
-// 	init: function()
-// 	{
-// 		setup();
-// 	}
-// };
+function rotateMatrix(rotateStart, rotateEnd)
+{
+  var axis = new THREE.Vector3(),
+    quaternion = new THREE.Quaternion();
+
+  var angle = Math.acos(rotateStart.dot(rotateEnd) / rotateStart.length() / rotateEnd.length());
+
+  if (angle)
+  {
+    axis.crossVectors(rotateStart, rotateEnd).normalize();
+    angle *= this.rotationSpeed;
+    quaternion.setFromAxisAngle(axis, angle);
+  }
+  return quaternion;
+}

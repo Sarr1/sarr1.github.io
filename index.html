@@ -19,18 +19,14 @@
         this.rotationSpeed = 2;
         this.lastMoveTimeStamp = 50;
         this.moveReleaseTimeDelta = 50;
-        document.addEventListener('mousedown',this.OnDocumentMouseDown.bind(this));
-        document.addEventListener('mouseup',this.OnDocumentMouseUp.bind(this));
-        document.addEventListener('mousemove',this.OnDocumentMouseMove.bind(this));
-        document.addEventListener('touchmove', this.OnDocumentMouseMove.bind(this));
-        document.addEventListener('touchup', this.OnDocumentMouseUp.bind(this));
+        document.addEventListener('mousedown', this.OnDocumentMouseDown.bind(this));
+        document.addEventListener('touchstart', this.OnDocumentMouseDown.bind(this));
       },
       OnDocumentMouseDown : function(event){
-        document.addEventListener('mousedown',this.OnDocumentMouseDown.bind(this));
         document.addEventListener('mouseup',this.OnDocumentMouseUp.bind(this));
         document.addEventListener('mousemove',this.OnDocumentMouseMove.bind(this));
         document.addEventListener('touchmove', this.OnDocumentMouseMove.bind(this));
-        document.addEventListener('touchup', this.OnDocumentMouseUp.bind(this));
+        document.addEventListener('touchend', this.OnDocumentMouseUp.bind(this));
 
         this.ifMouseDown = true;
 
@@ -53,11 +49,10 @@
         }
         this.ifMouseDown = false;
 
-        document.removeEventListener('mousedown');
         document.removeEventListener('mouseup');
         document.removeEventListener('mousemove');
         document.removeEventListener('touchmove');
-        document.removeEventListener('touchup');
+        document.removeEventListener('touchend');
       },
       OnDocumentMouseMove : function(event)
       {

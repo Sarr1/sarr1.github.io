@@ -14,13 +14,3 @@ function loadJSON(callback) {
     xobj.send(null);
 
 }
-
-// Call to function with anonymous callback
-loadJSON(function(response) {
-    
-    jsonresponse = JSON.parse(response);
-    console.log(jsonresponse[0]);
-    // Assuming json data is wrapped in square brackets as Drew suggests
-    //console.log(jsonresponse[0].name);
-
-});

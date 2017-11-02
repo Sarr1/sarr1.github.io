@@ -1,0 +1,69 @@
+{
+    "objects":[
+        {
+            "name": "ear1",
+            "obj": "url/ear1/.../ear.obj", // url of the .obj file
+            "texture": "url/ear1/.../texture.jpg", // url of the texture file
+            "narmalmap": "url/ear1/.../normal.jpg" // url of the normal map file
+        },
+        {
+            "name": "ear2",
+            "obj": "url/ear2/.../ear.obj",
+            "texture": "url/ear2/.../texture.jpg"
+        },
+        {
+            "name": "ear3",
+            "obj": "url/ear3/.../ear.obj",
+            "texture": "url/ear3/.../texture.jpg"
+        }
+    ],
+    "points": [
+        {
+            "name": "point1",
+            "dotpos": "0 0 5", // position of the dot
+            "objectpos":[
+                "0 5 5",
+                "0 5 2",
+                "......"
+            ]  // the coordinate of the structure on the object correcesponding to the connected point. There could be multiple positions.
+        },
+        {
+            "name": "point2",
+            "basepos": "-2 0 5",
+            "endpos": "-2 5 5"
+            
+        },
+        {
+            "name": "point3",
+            "basepos": "5 0 5",
+            "endpos": "5 5 5"
+        }
+    ],
+    "stages":[
+        {
+            "name": "stage1",
+            "questions": [
+                {"point": "point1", "type": "identify", "answer":"answer"},
+                {"point": "point1", "type": "description", "answer":"answer"},
+                {"point": "point2", "type": "identify", "answer":"answer"},
+                {"point": "point3", "type": "description", "answer":"answer"},
+                {"point": "point3", "type": "identify", "answer":"answer"},
+                {"point": "point2", "type": "description", "answer":"answer"}
+            ]
+        },
+        {
+            "name": "stage2",
+            "questions": [
+                {"point": "point1", "type": "identify", "answer":"answer"},
+                {"point": "point1", "type": "description", "answer":"answer"},
+                {"point": "point2", "type": "identify", "answer":"answer"},
+                {"point": "point3", "type": "description", "answer":"answer"},
+                {"point": "point3", "type": "identify", "answer":"answer"},
+                {"point": "point2", "type": "description", "answer":"answer"}
+            ]
+        }
+
+    ]
+    
+
+}

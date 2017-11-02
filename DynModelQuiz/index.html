@@ -1,0 +1,94 @@
+<!DOCTYPE html>
+<html lang="en">
+
+  <head>
+      <title>Ear Model</title>
+      <meta charset="utf-8">
+      <meta name="viewport" content="width=device-width, user-scalable=no, minimum-scale=1.0, maximum-scale=1.0">
+      <style>        
+          body {
+              font-family: Monospace;
+              background-color: #f0f0f0;
+              margin: 0px;
+              overflow: hidden;
+              padding:0px;            
+          }
+      </style>
+      <link rel="stylesheet" type="text/css" href="style.css">
+      <script src="assets/THREE.js"></script>
+  </head>
+
+  <body>
+      <div id="msgDiv">
+          <!--STAGE 1 TEXT BOXES -->
+          <input onmousedown="inputclicked()" ontouchstart="inputclicked()" class="StageOne inputtext i" id="PinnaI" type="text" placeholder="Name of this structure.">
+          <input onmousedown="inputclicked()" ontouchstart="inputclicked()" class="StageOne inputtext i" id="AuditoryCI" type="text" placeholder="Name of this structure.">
+          <input onmousedown="inputclicked()" ontouchstart="inputclicked()" class="StageOne inputtext i" id="EustachianI" type="text" placeholder="Name of this structure.">
+          <input onmousedown="inputclicked()" ontouchstart="inputclicked()" class="StageOne inputtext i" id="TympanicI" type="text" placeholder="Name of this structure.">
+          <input onmousedown="inputclicked()" ontouchstart="inputclicked()" class="StageOne inputtext i" id="CochleaI" type="text" placeholder="Name of this structure.">
+          <input onmousedown="inputclicked()" ontouchstart="inputclicked()" class="StageOne inputtext i" id="AuditoryNI" type="text" placeholder="Name of this structure.">
+
+          <!--STAGE 2 TEXT BOXES -->
+          <input onmousedown="inputclicked()" ontouchstart="inputclicked()" class="StageTwo inputtext i" id="SemiI" type="text" placeholder="Name of this structure.">
+          <input onmousedown="inputclicked()" ontouchstart="inputclicked()" class="StageTwo inputtext d" id="SemiD" type="text" placeholder="Describe the function of this structure.">
+
+          <!--STAGE 3 TEXT BOXES -->
+          <input onmousedown="inputclicked()" ontouchstart="inputclicked()" class="StageThree inputtext i" id="StapesI" type="text" placeholder="Name of this structure.">
+<!--           <input onmousedown="inputclicked()" ontouchstart="inputclicked()" class="StageThree inputtext d" id="StapesD" type="text" placeholder="Describe the function of this structure."> -->
+          <input onmousedown="inputclicked()" ontouchstart="inputclicked()" class="StageThree inputtext i" id="IncusI" type="text" placeholder="Name of this structure."> 
+<!--           <input onmousedown="inputclicked()" ontouchstart="inputclicked()" class="StageThree inputtext d" id="IncusD" type="text" placeholder="Describe the function of this structure."> -->
+          <input onmousedown="inputclicked()" ontouchstart="inputclicked()" class="StageThree inputtext i" id="MalleusI" type="text" placeholder="Name of this structure.">
+<!--           <input onmousedown="inputclicked()" ontouchstart="inputclicked()" class="StageThree inputtext d" id="MalleusD" type="text" placeholder="Describe the function of this structure."> -->
+          <input onmousedown="inputclicked()" ontouchstart="inputclicked()" class="StageThree inputtext d" id="OssiclesD" type="text" placeholder="Describe the function of the Ossicles.">
+        
+        <!--STAGE 4 TEXT BOXES -->
+          <input onmousedown="inputclicked()" ontouchstart="inputclicked()" class="StageFour inputtext i" id="PinnaS" type="text" placeholder="Inner, Outer or Middle.">
+          <input onmousedown="inputclicked()" ontouchstart="inputclicked()" class="StageFour inputtext i" id="AuditoryCS" type="text" placeholder="Inner, Outer or Middle.">
+          <input onmousedown="inputclicked()" ontouchstart="inputclicked()" class="StageFour inputtext i" id="EustachianS" type="text" placeholder="Inner, Outer or Middle.">
+          <input onmousedown="inputclicked()" ontouchstart="inputclicked()" class="StageFour inputtext i" id="TympanicS" type="text" placeholder="Inner, Outer or Middle.">
+          <input onmousedown="inputclicked()" ontouchstart="inputclicked()" class="StageFour inputtext i" id="CochleaS" type="text" placeholder="Inner, Outer or Middle.">
+          <input onmousedown="inputclicked()" ontouchstart="inputclicked()" class="StageFour inputtext i" id="AuditoryNS" type="text" placeholder="Inner, Outer or Middle.">
+          <input onmousedown="inputclicked()" ontouchstart="inputclicked()" class="StageFour inputtext i" id="SemiS" type="text" placeholder="Inner, Outer or Middle.">
+          <input onmousedown="inputclicked()" ontouchstart="inputclicked()" class="StageFour inputtext i" id="StapesS" type="text" placeholder="Inner, Outer or Middle.">
+          <input onmousedown="inputclicked()" ontouchstart="inputclicked()" class="StageFour inputtext i" id="IncusS" type="text" placeholder="Inner, Outer or Middle.">
+          <input onmousedown="inputclicked()" ontouchstart="inputclicked()" class="StageFour inputtext i" id="MalleusS" type="text" placeholder="Inner, Outer or Middle.">
+    
+      
+          <input id="tryAgainMsg" type="button" value="Wrong answer. Try again (2)." disabled>
+          
+          <div id="ANSSemi">Answer: The function of the semicircular canals is to monitor the position of the body in space and to maintain equilibrium.</div>
+          <div id="ANSOss">Answer: The malleus, incus and stapes bones transfer vibrations of the tympanic membrane (the eardrum) to the membrane covering the oval window.</div>
+          <div id="wellDone">Well done! On to the next stage.</div>
+      </div>
+      
+     <div id="gui_container">
+<!--           <textarea onclick="instructionClicked()" id="instruction" rows="4">
+              At w3schools.com you will learn how to make a website. We offer free tutorials in all web development technologies.
+          </textarea> -->
+        
+        <input onmousedown="inputclicked()" ontouchstart="inputclicked()" id="instructionButton" type="button" onclick="showInstructions()" value="Instructions">
+       
+        <div id="slidecontainer">
+            <input onmousedown="inputclicked()" ontouchstart="inputclicked()" type="range" min="1" max="100" value="35" class="slider" id="scaleslider">
+            
+        </div>
+        <p id="info" disabled>Adjust scale </p>
+           <div onmousedown="inputclicked()" ontouchstart="inputclicked()" onclick="hideInstructions()" id="instruction">
+    <!--             <h4 id="instructionText">Instructions: Identify the structures indicated by the points. (click to dismiss)</h4> -->
+              <h4 id="instructionText">- Tap/click on the green orbs to progress through the quiz.<br>- Best viewed in portrait mode.</h4>
+              
+          </div>
+    </div>
+    
+    <script type="text/javascript" src="./Rotation.js"></script>
+<!--     <div onclick="hideMe(this)" id="description">
+      <h2>Draggable Cubes in the World</h2>
+      <h5>(click to dismiss)</h5>
+      <p>This example repurposes the THREE.js draggablecubes example. The cubes have been put 
+        around you in the world. When selected, a cube will then move as the 
+        device moves, keeping it's position relative to the device.  You can use touch/mouse interaction,
+        or crosshair interaction.</p>
+    </div> -->
+
+  </body>
+</html>

@@ -553,7 +553,7 @@ Defmech.RotationWithQuaternion = (function()
     loader.load('https://sarr1.github.io/DynModelQuiz/assets/Ear2.obj', function ( object ) {
         var child = object.children[0];
 
-        child.material.map = textureLoader.load( "https://sarr1.github.io/DynModelQuiz/assets/Ear2_color.jpg?1507082281503" );
+        child.material.map = textureLoader.load( "https://sarr1.github.io/DynModelQuiz/assets/Ear2_color.jpg" );
         child.material.normalMap = textureLoader.load( "https://sarr1.github.io/DynModelQuiz/assets/Ear2_normals.jpg" );
         object.position.x = -1.38697;
         object.position.y = 2.28417;

@@ -593,8 +593,7 @@ Defmech.RotationWithQuaternion = (function()
     // Call to function with anonymous callback
 loadJSON(function(response) {
     
-    jsonresponse = JSON.parse(response);
-    console.log(jsonresponse[0]);
+    console.log(response);
     // Assuming json data is wrapped in square brackets as Drew suggests
     //console.log(jsonresponse[0].name);
 

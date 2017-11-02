@@ -570,8 +570,8 @@ Defmech.RotationWithQuaternion = (function()
     loader.load('https://sarr1.github.io/DynModelQuiz/assets/EarMain.obj', function ( object ) {
         var child = object.children[0];
         // child.material.map = ear3ObjectTex;
-        child.material.map = textureLoader.load( "https://sarr1.github.io/DynModelQuiz/assets/Ear_main.jpg" );
-        child.material.normalMap = textureLoader.load( "https://sarr1.github.io/DynModelQuiz/assets/Ear_main_Normal.jpg" );
+        child.material.map = textureLoader.load( "https://sarr1.github.io/DynModelQuiz/assets/EarMain_color.jpg" );
+        child.material.normalMap = textureLoader.load( "https://sarr1.github.io/DynModelQuiz/assets/EarMain_normal.jpg" );
         object.scale.x = modelScale;
         object.scale.y = modelScale;
         object.scale.z = modelScale;

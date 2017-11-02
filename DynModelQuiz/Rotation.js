@@ -531,11 +531,11 @@ Defmech.RotationWithQuaternion = (function()
     
     var ear1Object = new THREE.Object3D;
     var loader = new THREE.OBJLoader( );
-    loader.load('assets/Ear1.obj', function ( object ) {
+    loader.load('https://sarr1.github.io/DynModelQuiz/assets/Ear1.obj', function ( object ) {
         var child = object.children[0];
 
-        child.material.map = textureLoader.load( "assets/Ear1_color.jpg" );
-        child.material.normalMap = textureLoader.load( "assets/Ear1_normal.jpg" );
+        child.material.map = textureLoader.load( "https://sarr1.github.io/DynModelQuiz/assets/Ear1_color.jpg" );
+        child.material.normalMap = textureLoader.load( "https://sarr1.github.io/DynModelQuiz/assets/Ear1_normal.jpg" );
         
         object.position.x = -0.48;
         object.position.y = 1.75;
@@ -550,11 +550,11 @@ Defmech.RotationWithQuaternion = (function()
 
     var ear2Object = new THREE.Object3D;
     var loader = new THREE.OBJLoader( );
-    loader.load('assets/Ear2.obj', function ( object ) {
+    loader.load('https://sarr1.github.io/DynModelQuiz/assets/Ear2.obj', function ( object ) {
         var child = object.children[0];
 
-        child.material.map = textureLoader.load( "assets/Ear2_color.jpg?1507082281503" );
-        child.material.normalMap = textureLoader.load( "assets/Ear2_normals.jpg" );
+        child.material.map = textureLoader.load( "https://sarr1.github.io/DynModelQuiz/assets/Ear2_color.jpg?1507082281503" );
+        child.material.normalMap = textureLoader.load( "https://sarr1.github.io/DynModelQuiz/assets/Ear2_normals.jpg" );
         object.position.x = -1.38697;
         object.position.y = 2.28417;
         object.position.z = -0.31602;
@@ -567,11 +567,11 @@ Defmech.RotationWithQuaternion = (function()
 
     var ear3Object = new THREE.Object3D;
     var loader = new THREE.OBJLoader( );
-    loader.load('assets/EarMain.obj', function ( object ) {
+    loader.load('https://sarr1.github.io/DynModelQuiz/assets/EarMain.obj', function ( object ) {
         var child = object.children[0];
         // child.material.map = ear3ObjectTex;
-        child.material.map = textureLoader.load( "assets/Ear_main.jpg" );
-        child.material.normalMap = textureLoader.load( "Ear_main_Normal.jpg" );
+        child.material.map = textureLoader.load( "https://sarr1.github.io/DynModelQuiz/assets/Ear_main.jpg" );
+        child.material.normalMap = textureLoader.load( "https://sarr1.github.io/DynModelQuiz/Ear_main_Normal.jpg" );
         object.scale.x = modelScale;
         object.scale.y = modelScale;
         object.scale.z = modelScale;

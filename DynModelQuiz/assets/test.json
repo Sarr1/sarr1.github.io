@@ -1,0 +1,26 @@
+{
+    "objects":[
+        {
+            "name": "EarMain",
+            "obj": "https://sarr1.github.io/DynModelQuiz/assets/EarMain.obj", // url of the .obj file
+            "texture": "https://sarr1.github.io/DynModelQuiz/assets/EarMain_color.jpg", // url of the texture file
+            "narmalmap": "https://sarr1.github.io/DynModelQuiz/assets/EarMain_normal.jpg", // url of the normal map file
+            "scale" : {"x":"1", "y":"1", "z":"1"},
+            "position" : {"x":"0", "y":"-2", "z":"-10"}
+        },
+        {
+            "name": "Semi",
+            "obj": "https://sarr1.github.io/DynModelQuiz/assets/Ear2.obj",
+            "texture": "https://sarr1.github.io/DynModelQuiz/assets/Ear2_color.jpg",
+            "narmalmap": "https://sarr1.github.io/DynModelQuiz/assets/Ear2_normals.jpg",
+            "position" : {"x":"-0.48", "y":"1.75", "z":"0.6"}
+        },
+        {
+            "name": "Tymp",
+            "obj": "https://sarr1.github.io/DynModelQuiz/assets/Ear1.obj",
+            "texture": "https://sarr1.github.io/DynModelQuiz/assets/Ear1_color.jpg",
+            "narmalmap": "https://sarr1.github.io/DynModelQuiz/assets/Ear1_normal.jpg",
+            "position" : {"x":"-1.38697", "y":"2.28417", "z":"-0.31602"}
+        }
+    ]
+}

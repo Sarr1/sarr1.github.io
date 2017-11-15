@@ -588,17 +588,7 @@ Defmech.RotationWithQuaternion = (function()
         {
           ear3Object.add(lines[i]);  
         }
-    });
-
-    // Call to function with anonymous callback
-loadJSON(function(response) {
-    
-    console.log(response[0]);
-    // Assuming json data is wrapped in square brackets as Drew suggests
-    //console.log(jsonresponse[0].name);
-
-});
- 
+    }); 
     
     //===============================================================================
     // WebGL renderer

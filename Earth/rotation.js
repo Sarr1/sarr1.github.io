@@ -3,8 +3,8 @@
 ////////////////////////////
 
 var mouseDown = false;
-var rotateStartPoint = new THREE.Vector3(0, 0, 1);
-var rotateEndPoint = new THREE.Vector3(0, 0, 1);
+var rotateStartPoint = new THREE.Vector3(0, 1, 0);
+var rotateEndPoint = new THREE.Vector3(0, 1, 0);
 var mainObj;
 var curQuaternion;
 var windowHalfX = window.innerWidth / 2;
@@ -69,7 +69,7 @@ AFRAME.registerComponent('drag-rotate-component',{
       deltaX = getClientX(event) - startPoint.x;
       deltaY = getClientY(event) - startPoint.y;
 
-      handleRotation(this.el.object3D);
+      handleRotation();
 
       startPoint.x = getClientX(event);
       startPoint.y = getClientY(event); 
@@ -106,9 +106,9 @@ function projectOnTrackball(touchX, touchY)
   var mouseOnBall = new THREE.Vector3();
 
   mouseOnBall.set(
-    clamp(touchX / windowHalfX, -1, 1), 
-    clamp(-touchY / windowHalfY, -1, 1),
-    0.0
+    clamp(touchX / windowHalfX, -1, 1),
+    0.0,
+    clamp(touchY / windowHalfY, -1, 1)
   );
 
   var length = mouseOnBall.length();
@@ -119,7 +119,7 @@ function projectOnTrackball(touchX, touchY)
   }
   else
   {
-    mouseOnBall.z = Math.sqrt(1.0 - length * length);
+    mouseOnBall.y = Math.sqrt(1.0 - length * length);
   }
 
   return mouseOnBall;

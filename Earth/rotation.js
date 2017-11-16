@@ -5,7 +5,7 @@
 var mouseDown = false;
 var rotateStartPoint = new THREE.Vector3(0, 0, 1);
 var rotateEndPoint = new THREE.Vector3(0, 0, 1);
-
+var mainObj;
 var curQuaternion;
 var windowHalfX = window.innerWidth / 2;
 var windowHalfY = window.innerHeight / 2;
@@ -28,6 +28,7 @@ AFRAME.registerComponent('drag-rotate-component',{
   schema : { speed : {default:1}},
   init : function() {
     console.log(this.el.object3D)
+    mainObj = this.el.object3D;
     document.addEventListener('mousedown', this.OnDocumentMouseDown.bind(this), false);
     document.addEventListener('touchstart', this.OnDocumentMouseDown.bind(this), false);
   },
@@ -77,51 +78,23 @@ AFRAME.registerComponent('drag-rotate-component',{
     }
   } 
 });
-
+ 
 ////////////////////////////
 ////  ROTATION HELPERS  ////
 ////////////////////////////
-var handleRotation = function(object)
+var handleRotation = function()
 {
+  if(!mainObj) return;
   rotateEndPoint = projectOnTrackball(deltaX, deltaY);
 
   var rotateQuaternion = rotateMatrix(rotateStartPoint, rotateEndPoint);
-  curQuaternion = object.quaternion;
+  curQuaternion = mainObj.quaternion;
   curQuaternion.multiplyQuaternions(rotateQuaternion, curQuaternion);
   curQuaternion.normalize();
-  object.setRotationFromQuaternion(curQuaternion);
+  mainObj.setRotationFromQuaternion(curQuaternion);
 
   rotateEndPoint = rotateStartPoint;
 };
-function getClientX(event){
-    switch(event.type){
-        case "mousedown":
-        case "mouseup":
-        case "mousemove":
-            return event.clientX;
-
-        case "touchstart":
-        case "touchend":
-        case "touchmove":
-            return event.touches[0].clientX;
-    }
-}
-
-function getClientY(event){
-    switch(event.type){
-        case "mousedown":
-        case "mouseup":
-        case "mousemove":
-            return event.clientY;
-
-        case "touchstart":
-        case "touchend":
-        case "touchmove":
-            return event.touches[0].clientY;
-        default: 
-            return 0;
-    }
-}
 
 function clamp(value, min, max)
 {
@@ -162,8 +135,39 @@ function rotateMatrix(rotateStart, rotateEnd)
   if (angle)
   {
     axis.crossVectors(rotateStart, rotateEnd).normalize();
-    angle *= this.rotationSpeed;
+    angle *= rotationSpeed;
     quaternion.setFromAxisAngle(axis, angle);
   }
   return quaternion;
 }
+
+function getClientX(event){
+    switch(event.type){
+        case "mousedown":
+        case "mouseup":
+        case "mousemove":
+            return event.clientX;
+
+        case "touchstart":
+        case "touchend":
+        case "touchmove":
+            return event.touches[0].clientX;
+    }
+}
+
+function getClientY(event){
+    switch(event.type){
+        case "mousedown":
+        case "mouseup":
+        case "mousemove":
+            return event.clientY;
+
+        case "touchstart":
+        case "touchend":
+        case "touchmove":
+            return event.touches[0].clientY;
+        default: 
+            return 0;
+    }
+}
+

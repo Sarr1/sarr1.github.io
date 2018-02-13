@@ -12,7 +12,7 @@
 
 			t3d.removeAll();
 			// t3d.loadOcclusionHead("assets/brfv4_occlusion_head.json", numFacesToTrack);
-			t3d.lozadModel("assets/samsung_vr.FBX", numFacesToTrack);
+			t3d.loadModel("assets/cv1_FF.blend.json", numFacesToTrack);
 		}
 	}
 

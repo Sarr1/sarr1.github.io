@@ -55,8 +55,8 @@ brfv4Example.start = function() {
 		// "js/libs/quicksettings/quicksettings.min.css",			// gui elements
 		// "js/libs/quicksettings/quicksettings.js",
 
-		"js/libs/highlight/highlight_tomorrow.css",				// code highlighter
-		"js/libs/highlight/highlight.pack.js",
+		// "js/libs/highlight/highlight_tomorrow.css",				// code highlighter
+		// "js/libs/highlight/highlight.pack.js",
 
 		"js/libs/createjs/easeljs.min.js",						// canvas drawing lib
 		"js/libs/threejs/three.min.js",							// ThreeJS: a 3D engine

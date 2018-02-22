@@ -1,0 +1,65 @@
+<script src="https://aframe.io/releases/0.6.0/aframe.min.js"></script>
+<script src="https://jeromeetienne.github.io/AR.js/aframe/build/aframe-ar.js"></script>
+<script src="libs/threes.js"></script>
+<head>
+  <title>AR Model Viewer</title>
+</head>
+
+<body style="margin : 0px; overflow: hidden;">
+  <script type="text/javascript" src="../seyha/rotation.js"></script>
+  
+  <!--  EAR MODEL  -->
+  <a-scene embedded arjs="sourceType: webcam;">
+    <!-- handle marker with your own pattern -->
+<!--     <a-entity make-earth drag-rotate-component position="0 0 -5">
+      <a-entity heart-disease position="0 0 0"></a-entity>    
+    </a-entity> -->
+      
+<!--     <a-marker type="pattern" patternurl="https://cdn.glitch.com/680745de-3f75-455f-a879-aa8128a0a6cf%2Fpatt.hiro?1509335126666">
+      <a-entity make-earth drag-rotate-component>
+        <a-entity heart-disease position="1 0 0" scale="0.4 0.4 0.4"></a-entity>    
+      </a-entity>
+    </a-marker> -->
+    
+    <a-marker preset="hiro">
+      <a-entity>
+        <a-obj-model drag-rotate-component
+                     id="Main Ear"
+                     obj-model="obj: objs/EarMain.obj"
+                     scale="0.3 0.3 0.3"
+                     give-texture="texture: objs/EarMainColour.jpg; normal: objs/EarNormalColour.jpg;"
+        > 
+          <a-obj-model 
+                       id="Ear Drum" 
+                       src="objs/Ear1.obj" 
+                       position="-0.48 1.75 0.6" 
+                       give-texture="texture: objs/Ear1Colour.jpg; normal: objs/Ear1Normal.jpg;"
+          ></a-obj-model>
+          <a-obj-model 
+                       id="Other Ear Part" 
+                       src="objs/Ear2.obj" 
+                       position="-1.38697 2.28417 -0.31602"
+                       give-texture="texture: objs/Ear2Colour.jpg; normal: objs/Ear2Normal.jpg;"
+
+          ></a-obj-model>
+        </a-obj-model>
+      </a-entity>
+    </a-marker>
+    <!-- add a simple camera -->
+    <a-entity camera></a-entity>
+    
+    <script>
+      // var marker = document.querySelector("a-marker");
+      // console.log(marker);
+      
+      var scene = document.querySelector('a-scene');
+      scene.addEventListener('loaded', init);
+      function init(){
+        var debugui = document.getElementById("arjsDebugUIContainer");
+        debugui.style.visibility = "hidden";
+      }
+      
+    </script>
+    
+  </a-scene>
+</body>

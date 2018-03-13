@@ -1,6 +1,10 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <QCARConfig xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:noNamespaceSchemaLocation="qcar_config.xsd">
   <Tracking>
+    <ImageTarget name="HumanDiseaseMarker2" size="1.000000 1.000000" />
+    <ImageTarget name="HumanDiseaseMarker" size="1.000000 1.000000" />
+    <ImageTarget name="IMG_1508" size="1.000000 0.750000" />
+    <ImageTarget name="IMG_1506" size="1.000000 0.750000" />
     <ImageTarget name="markerthree" size="1.000000 1.413710" />
     <ImageTarget name="markertwo" size="1.000000 1.413710" />
     <ImageTarget name="markerone" size="1.000000 1.413710" />

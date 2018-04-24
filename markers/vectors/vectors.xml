@@ -8,16 +8,16 @@
         <ImageTarget name="planes" size="1.000000 1.000000"/>
         <ImageTarget name="dotproduct" size="1.000000 1.000000"/>
         <ImageTarget name="addition" size="1.000000 1.000000"/>
+        <ImageTarget name="vectorcube.Right" size="1.000000 1.000000"/>
+        <ImageTarget name="vectorcube.Front" size="1.000000 1.000000"/>
         <ImageTarget name="vectorcube.Top" size="1.000000 1.000000"/>
         <ImageTarget name="vectorcube.Back" size="1.000000 1.000000"/>
-        <ImageTarget name="vectorcube.Front" size="1.000000 1.000000"/>
-        <ImageTarget name="vectorcube.Right" size="1.000000 1.000000"/>
         <ImageTarget name="vectorcube.Left" size="1.000000 1.000000"/>
         <ImageTarget name="vectorcube.Bottom" size="1.000000 1.000000"/>
+        <ImageTarget name="controller.Right" size="1.000000 1.000000"/>
+        <ImageTarget name="controller.Front" size="1.000000 1.000000"/>
         <ImageTarget name="controller.Top" size="1.000000 1.000000"/>
         <ImageTarget name="controller.Back" size="1.000000 1.000000"/>
-        <ImageTarget name="controller.Front" size="1.000000 1.000000"/>
-        <ImageTarget name="controller.Right" size="1.000000 1.000000"/>
         <ImageTarget name="controller.Left" size="1.000000 1.000000"/>
         <ImageTarget name="controller.Bottom" size="1.000000 1.000000"/>
         <MultiTarget name="vectorcube">

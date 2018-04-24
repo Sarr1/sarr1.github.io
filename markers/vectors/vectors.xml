@@ -1,6 +1,7 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <QCARConfig>
     <Tracking>
+<<<<<<< HEAD
         <ImageTarget name="crossproduct" size="1.000000 1.000000"/>
         <ImageTarget name="xproduct" size="1.000000 1.000000"/>
         <ImageTarget name="subtraction" size="1.000000 1.000000"/>
@@ -8,6 +9,8 @@
         <ImageTarget name="planes" size="1.000000 1.000000"/>
         <ImageTarget name="dotproduct" size="1.000000 1.000000"/>
         <ImageTarget name="addition" size="1.000000 1.000000"/>
+=======
+>>>>>>> 53ac50c81e9b56a5829c132e6c319bdf8359fe09
         <ImageTarget name="vectorcube.Top" size="1.000000 1.000000"/>
         <ImageTarget name="vectorcube.Back" size="1.000000 1.000000"/>
         <ImageTarget name="vectorcube.Front" size="1.000000 1.000000"/>
